@@ -256,3 +256,6 @@ user.nickname
 user.age
 
 user.information()
+
+
+//20220125 끝
