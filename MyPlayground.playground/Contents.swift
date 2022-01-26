@@ -425,3 +425,5 @@ SomeStructure.computedTypeProperty
 SomeStructure.storedTypeProperty
 SomeStructure.storedTypeProperty = "hello"
 SomeStructure.storedTypeProperty
+
+//20220126 끝
