@@ -259,3 +259,169 @@ user.information()
 
 
 //20220125 끝
+
+//20220126
+
+/*
+ class 클래스이름 {
+    프로퍼티와 메서드
+ }
+ */
+
+class Dog{
+    var name: String = ""
+    var age: Int = 0
+    
+    init(){
+        
+    }
+    
+    func introduce() {
+        print("name \(name) age \(age)")
+    }
+}
+
+var dog = Dog()
+dog.name = "coco"
+dog.age = 2
+dog.name
+dog.age
+
+dog.introduce()
+
+
+/*
+ init(매개변수: 타입, ...){
+    //프로퍼티 초기화
+    //인스턴스 생성시 필요한 설정을 해주는 코드 작성
+ }
+ */
+
+class User2 {
+    var nickname: String
+    var age: Int
+    
+    init(nickname: String, age: Int){
+        self.nickname = nickname
+        self.age = age
+    }
+    
+    init(age: Int){
+        self.nickname = "ablert"
+        self.age = age
+    }
+    
+    deinit {
+        print("deinit user")
+    }
+}
+
+var user2 = User2(nickname: "Gunter", age: 23)
+user2.nickname
+user2.age
+
+var user3 = User2(age: 27)
+user3.nickname
+user3.age
+
+
+var user4: User2? = User2(age: 23)
+user4 = nil
+
+//프로퍼티란
+//클래스, 구조체 또는 열거형 등에 관련된 값을 뜻한다.
+//저장 ㅡ폴퍼티, 연산프로퍼티, 타입 프로퍼티
+
+//저장 프로퍼티
+struct Dog2 {
+    var name: String
+    let gender: String
+}
+
+var dog2 = Dog2(name: "Gunter", gender: "Male")
+print(dog2)
+
+
+dog2.name = "shseo"
+//dog2.gender = "female" 상수라서 에러
+
+let dog3 = Dog2(name: "gunter", gender: "male")
+
+//dog3.name = "shseo" // 구조체 인스턴스인 dog3가 상수로 선언되었기 때문에 에러
+//dog3 가 상수로 선언 되었기 때문에 구조체 내부 프로퍼티들도 상수로 바뀜
+
+//클래스는 구조체와 다르게 상수로 선언해도 변수로 선언한 프로퍼티의 값을 바꿀수 있음
+class Cat {
+    var name: String
+    let gender: String
+    
+    init(name: String, gender: String){
+        self.name = name
+        self.gender = gender
+    }
+}
+
+let cat = Cat(name: "json", gender: "male")
+cat.name = "gunter"
+//cat.gender = "female" 프로퍼티 선언을 상수로 선언해 변경 불가
+print(cat.name)
+print(cat.gender)
+
+
+//계산 프로퍼티
+//클래스, 구조체, 열거형에서 사용가능
+struct Stock {
+    var averagePrice: Int
+    var qty: Int
+    var purchasePrice: Int {
+        get {
+            return averagePrice * qty
+        }
+        
+//        set(newPrice) {
+//            averagePrice = newPrice / qty
+//        }
+        set {
+            averagePrice = newValue / qty
+        }
+    }
+}
+
+var stock = Stock(averagePrice: 2300, qty: 3)
+print(stock)
+stock.purchasePrice
+stock.purchasePrice = 3000
+stock.averagePrice
+
+//프로퍼티 옵저버
+//저장 프로퍼티, 오버라이딩 된 저장,계산 프로퍼티에서만 사용 가능
+class Account {
+    var credit: Int = 0 {
+        //소괄호 이름 지정
+        willSet {
+            print("잔액이 \(credit)원에서 \(newValue)원으로 변경될 예정입니다.")
+        }
+        
+        didSet {
+            print("잔액이 \(oldValue)원에서 \(credit)원으로 변경되었습니다.")
+        }
+        
+    }
+}
+
+var account = Account()
+account.credit = 1000
+
+//타입 프로퍼티
+//인스턴스 생성없이 객체 내의 프로퍼티에 접근을 간으하게 하는 것
+struct SomeStructure {
+    static var storedTypeProperty = "Some value."//스토어
+    static var computedTypeProperty: Int { //컴퓨티드
+        return 1
+    }
+}
+
+SomeStructure.computedTypeProperty
+SomeStructure.storedTypeProperty
+SomeStructure.storedTypeProperty = "hello"
+SomeStructure.storedTypeProperty
