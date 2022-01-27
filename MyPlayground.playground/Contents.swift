@@ -427,3 +427,93 @@ SomeStructure.storedTypeProperty = "hello"
 SomeStructure.storedTypeProperty
 
 //20220126 끝
+
+//20220127
+//클래스와 구조체의 차이점
+//클래스는 참조타입, 구조체는 값타입
+class SomeClass {
+    var count: Int = 0
+}
+
+struct SomeStruct {
+    var count: Int = 0
+}
+
+var class1 = SomeClass()
+var class2 = class1
+var class3 = class1
+
+class3.count = 2
+class1.count
+
+var struct1 = SomeStruct()
+var struct2 = struct1
+var struct3 = struct1
+
+struct2.count = 3
+struct3.count = 4
+
+struct1.count
+struct2.count
+struct3.count
+
+//상속
+class Vehicle {
+    var currentSpeed = 0.0
+    var descriptuon: String {
+        return "traveling at \(currentSpeed) miles per hour"
+    }
+    func makeNoise(){
+        print("speaker on")
+    }
+}
+
+/*
+ class 클래스 이름 : 부모클래스 이름 {
+    하위 클래스 정의
+ }
+ */
+class Bicycle: Vehicle {
+    var hasBasket = false
+}
+
+var bicycle = Bicycle()
+bicycle.currentSpeed
+bicycle.currentSpeed = 15.0
+bicycle.currentSpeed
+
+class Train: Vehicle {
+    override func makeNoise() {
+        super.makeNoise()
+        print("choo choo")
+    }
+}
+
+let train = Train()
+train.makeNoise()
+
+class Car:Vehicle {
+    var gear = 1
+    override var descriptuon: String {
+        return super.descriptuon + "in gear \(gear)"
+    }
+}
+
+let car = Car()
+car.currentSpeed = 30.0
+car.gear = 2
+print(car.descriptuon)
+
+class AutomaticCar: Car {
+    override var currentSpeed: Double {
+        didSet {
+            gear = Int(currentSpeed / 10) + 1
+        }
+    }
+}
+
+let automatic = AutomaticCar()
+automatic.currentSpeed = 35.0
+print("AutomaticCar: \(automatic.descriptuon)")
+
+//20220127끝
