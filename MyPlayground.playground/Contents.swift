@@ -517,3 +517,95 @@ automatic.currentSpeed = 35.0
 print("AutomaticCar: \(automatic.descriptuon)")
 
 //20220127끝
+
+//10일만의 출석
+//20220207 시작
+//타입 캐스팅
+//인스턴스의 타입을 확인하거나 어떠한 클래스의 인스턴스를 해당 클래스
+//계층 구조의 슈퍼 클래스나 서브 클래스로 취급 하는 방법
+//is, as
+
+class MediaItem {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class Movie: MediaItem {
+    var director: String
+    init(name: String, director: String) {
+        self.director = director
+        super.init(name: name)
+    }
+}
+
+class Song: MediaItem {
+    var artist: String
+    init(name: String, artist: String) {
+        self.artist = artist
+        super.init(name: name)
+    }
+}
+
+let library = [
+    Movie(name: "기생충", director: "봉준호"),
+    Song(name: "Butter", artist: "BTS"),
+    Movie(name: "올드보이", director: "박찬욱"),
+    Song(name: "Wonderwall", artist: "Oasis"),
+    Song(name: "Rain", artist: "이적")
+]
+
+var movieCount = 0
+var songCount = 0
+
+for item in library {
+    if item is Movie {
+        movieCount += 1
+    } else if item is Song {
+        songCount += 1
+    }
+}
+
+print("Media library contains \(movieCount) movies and \(songCount) songs.")
+
+
+for item in library {
+    if let movie = item as? Movie {
+        print("Movie: \(movie.name), dir. \(movie.director)")
+    } else if let song = item as? Song {
+        print("Song: \(song.name), by \(song.artist)")
+    }
+}
+
+
+//asseret와 guard
+/*
+ assert
+ - 특정 조건을 체크하고, 조건이 성립되지 않으면 메세지를 출력 하게 할 수 있는 함수
+ - assert 함수는 디버깅 모드에서만 동작하고 주로 디버깅 중 조건의 검증을 위하여 사용
+ guard
+ - 뭔가를  검사하여 그 다음에 오는 코드를 실행할지 말지 결정 하는 것
+ - guard 문에 주어진 조건문이 거짓일 때 구문이 실행됨
+ */
+
+var value01 = 0
+assert(value01 == 0)
+
+value01 = 2
+//assert(value01 == 0, "값이 0이 아닙니다.")
+
+/*
+    guard 조건 else {
+        //조건이 false 이면 else 구문이 싱행되고
+        return or throw or break 를 통해 이 후 코드를 실행하지 않도록 한다.
+    }
+ */
+
+
+func guardTest(value03: Int?) {
+    guard let value03 = value03 else { return }
+    print(value03)
+}
+
+guardTest(value03: 0)
