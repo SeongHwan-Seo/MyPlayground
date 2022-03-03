@@ -609,3 +609,68 @@ func guardTest(value03: Int?) {
 }
 
 guardTest(value03: 0)
+
+//20220303
+/*
+ 프로토콜
+ - 특정 역할을 하기 위한 메서드, 프로퍼티 기타 요구사항 등의 청사진
+ */
+
+protocol SomeProtocol {
+    
+}
+
+protocol SomeProtocol2 {
+    
+}
+
+
+struct SomeStructure2: SomeProtocol, SomeProtocol2 {
+    
+}
+
+/*
+ class SomceClass: SomeSuperclass, FirstProtocol {
+ 
+ }
+ */
+
+protocol FirstProtocol {
+    var name: Int { get set }
+    var age: Int { get }
+}
+
+protocol AnotherProtocol {
+    static var someTypeProperty: Int { get set }
+    //타입프로퍼티를 요굴할 때에는 항상 static 키워드를 붙여야 한다.
+}
+
+protocol FullyNames {
+    var fullName: String {get set}
+    func printFullName()
+}
+
+struct Person: FullyNames {
+    var fullName: String
+    func printFullName() {
+        print(fullName)
+    }
+}
+
+protocol SomeProtocol3 {
+    func someTypeMethod()
+}
+
+protocol SomeProtocol4 {
+    init(someParameter: Int)
+}
+
+protocol Someprotocol5 {
+    init()
+}
+
+class SomeClass3: Someprotocol5 {
+    required init() {
+        
+    }
+}
