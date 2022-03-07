@@ -674,3 +674,92 @@ class SomeClass3: Someprotocol5 {
         
     }
 }
+
+/*
+ 20220307
+ 익스텐션 - 기존의 클래스, 구조체, 열거형, 프로토콜에 새로운 기능을 추가하는 기능
+ 익스텐션이 타입에 추가할 수 있는 기능
+ 1. 연산 타입 프로퍼티 / 연산 인스턴스 프로퍼티
+ 2. 타입 메서드 / 인스턴스 메서드
+ 3. 이니셜라이저
+ 4. 서브스크립트
+ 5. 중첩 타입
+ 6. 특정 프로토콜을 준수할 수 있도록 기능 추가
+ */
+
+
+/*
+ extension SomeType {
+    //추가 기능
+ }
+ */
+extension Int {
+    var isEven: Bool {
+        return self % 2 == 0
+    }
+    
+    var isOdd: Bool {
+        return self % 2 == 1
+    }
+    
+}
+
+var number0307 = 3
+number0307.isOdd
+number0307.isEven
+
+extension String {
+    func convertToInt() -> Int? {
+        return Int(self)
+    }
+}
+
+var string0307 = "0"
+string0307.convertToInt()
+
+
+/*
+ 열거형 - 연관성이 있는 값을 모아 놓은 것을 말한다.
+ */
+
+enum CompassPoint: String {
+    case north = "북"
+    case south = "남"
+    case east = "동"
+    case west = "서"
+}
+
+var direction = CompassPoint.east
+direction = .north //컴파일러가 direction 변수는 CompassPoint 열거형 타입이라는걸 추론을 하게 되서 .value로 가능
+
+switch direction {
+case .north:
+    print("north")
+    print(direction.rawValue) //원시값을 출력하고 싶을 때
+case .south:
+    print("south")
+    print(direction.rawValue)
+case .east:
+    print("east")
+    print(direction.rawValue)
+case .west:
+    print("west")
+    print(direction.rawValue)
+}
+
+let direction2 = CompassPoint(rawValue: "남")
+
+enum PhoneError {
+    case unknown
+    case batteryLow(String) //연관값 추가방법
+}
+
+let error = PhoneError.batteryLow("배터리가 곧 방전됩니다.")
+
+
+switch error {
+case.batteryLow(let message):
+    print(message)
+case .unknown:
+    print("알 수 없는 에러입니다.")
+}
